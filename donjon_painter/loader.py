@@ -87,6 +87,7 @@ def resourcesPresent(mapRes):
     for key, value in mapRes.items():
         if value is Image:
             imagesPresent = False
+            break
     
     return imagesPresent
 
@@ -226,4 +227,4 @@ def generateRes(savetiles, mapRes):
         # Generate new DD stair resources
         resGen(stairDDKeys)
         
-        return mapRes
+    return mapRes

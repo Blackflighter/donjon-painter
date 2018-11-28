@@ -49,7 +49,7 @@ def main(args=None):
     
     mapRes = loader.createImagePath(imagePath)
     mapRes = loader.generateRes(args.savetiles, mapRes)
-    
+
     if loader.resourcesPresent(mapRes) and mapArray != []:
         start = time.time()
         
@@ -68,6 +68,8 @@ def main(args=None):
             print("Done in", end - start, "seconds.")
         else:
             print("Done!")
+    else:
+        print("Map generation failed! Insufficient assets.")
     
 if __name__ == "__main__":
     main()
