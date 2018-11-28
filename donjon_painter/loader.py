@@ -92,7 +92,7 @@ def resourcesPresent(mapRes):
     return imagesPresent
 
 # Creates additional resources from existing ones
-def generateRes(savetiles, mapRes):
+def generateRes(savetiles, mapRes, mapPath):
     def genDict(curKeys):
         resDict = dict((i, mapRes[i]) for i in curKeys)
         return resDict
@@ -183,7 +183,7 @@ def generateRes(savetiles, mapRes):
                     
                     if (savetiles):
                         suffix = '.' + mapRes[keyName].format.lower()
-                        curFile = Path(path, val).with_suffix(suffix)
+                        curFile = Path(mapPath, val).with_suffix(suffix)
                         
                         tmpImage.save(curFile)
                         mapRes[key] = Image.open(curFile)

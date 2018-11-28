@@ -48,7 +48,10 @@ def main(args=None):
     saveDir     = writer.createSaveDirectory(args.output)
     
     mapRes = loader.createImagePath(imagePath)
-    mapRes = loader.generateRes(args.savetiles, mapRes)
+    
+    if loader.savetiles:
+        print("Writing new tiles to folder...")
+    mapRes = loader.generateRes(args.savetiles, mapRes, imagePath)
 
     if loader.resourcesPresent(mapRes) and mapArray != []:
         start = time.time()
