@@ -9,7 +9,7 @@ Creating New Themes
 ===================
 donjon-painter isn't limited to just the themes it comes with. You can easily make your own with a little work. Each theme is made up of 12 different tile assets, some rotated to face different ways (Top/Bottom/Left/Right).
 
-Creating a theme is just a matter of making a folder of at least 12 images that comprise those 12 different asset types. Each image should be in the shape of a square, examples of which can be seen in this project's `theme folder`_, the inbuilt themes that donjon-painter comes with. These images will be automatically rotated when necessary - you only need a single asset of each tile type to make it work.
+Creating a theme is just a matter of making a folder of at least 12 images that comprise those 12 different asset types. Each image should be in the shape of a square, examples of which can be seen in this project's `theme folder`_, the inbuilt themes that donjon-painter comes with. These images will be automatically rotated when necessary - **you only need a single asset of each tile type** to make it work.
 
 .. _theme folder: https://github.com/Blackflighter/donjon-painter/tree/master/donjon_painter/themes
 
