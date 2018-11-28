@@ -1,6 +1,6 @@
 Submitting New Themes
 =====================
-`Fork`_ this repository, and create a new theme folder (located in donjon_painter/themes/). The steps for creating a theme are down below. After doing so, make a `pull request`_ to this repository.
+`Fork`_ this repository, and create a new theme folder (located in **donjon_painter/themes/**). The steps for creating a theme are down below. After doing so, make a `pull request`_ to this repository.
 
 .. _Fork: https://help.github.com/articles/fork-a-repo/
 .. _pull request: https://help.github.com/articles/about-pull-requests/
