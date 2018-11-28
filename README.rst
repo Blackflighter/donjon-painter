@@ -10,7 +10,7 @@ donjon-painter is a companion script to `donjon's Random Dungeon Generator`_. By
 Prerequisites
 -------------
 - Python:
-    - >= 3.4
+    - >= 3.5
     - Pillow
 
 Installation
