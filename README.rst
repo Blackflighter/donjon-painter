@@ -35,13 +35,13 @@ donjon-painter is available on PyPI. Until I get to creating packages for differ
 --------
 setup.py
 --------
-This requires you to download the TAR.GZ version of donjon-painter, found `here`_. Having done so, extract the files, and navigate to the location of said folder. Having done this, run this command:
+All that needs to be done here is to `clone this repository`_. Having done so, extract the files, and navigate to the location of said folder. Once you're done with that, run this command:
 
 ::
 
     python3 setup.py install
 
-.. _here: https://github.com/Blackflighter/donjon-painter/releases/
+.. _clone this repository: https://help.github.com/articles/cloning-a-repository/
 
 Usage
 =====
