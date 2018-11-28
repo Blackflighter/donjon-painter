@@ -27,11 +27,13 @@ Windows users have the option of downloading an EXE version of the script, which
 ---------
 Using pip
 ---------
-donjon-painter is available on PyPI. Until I get to creating packages for different Linux distributions, this is the ideal way of using it on them. Get it using this command:
+donjon-painter is `available on PyPI`_. Until I get to creating packages for different Linux distributions, this is the ideal way of using it on them. Get it using this command:
 
 ::
 
     pip install --user --upgrade donjon-painter
+
+.. _available on PyPI: https://pypi.org/project/donjon-painter/
 
 --------
 setup.py
