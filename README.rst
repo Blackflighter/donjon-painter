@@ -1,9 +1,10 @@
 donjon-painter - Dungeon Map Maker
 ==================================
 
-donjon-painter is a companion script to `donjon's Random Dungeon Generator`_. By selecting a TSV file along with a set of tile assets, you can easily create large, beautiful dungeon maps.
+donjon-painter is a companion script to `donjon's Random Dungeon Generator`_. By selecting a TSV file along with a set of tile assets, you can easily create large, beautiful dungeon maps. Learn how to create new tilesets for donjon-painter `here`_.
 
 .. _donjon's Random Dungeon Generator: https://donjon.bin.sh/fantasy/dungeon/
+.. _here: https://github.com/Blackflighter/donjon-painter/blob/master/CONTRIBUTING.rst
 
 -------------
 Prerequisites
