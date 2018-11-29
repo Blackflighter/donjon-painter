@@ -1,1 +1,1 @@
-name = "donjon-painter" 
+name = "donjon-painter"
