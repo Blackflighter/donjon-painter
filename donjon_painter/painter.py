@@ -1,9 +1,6 @@
 from PIL import Image
 from random import choice
 
-import multiprocessing
-import os
-
 Image.MAX_IMAGE_PIXELS = None
 
 # Determine image to use for current position
