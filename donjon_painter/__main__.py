@@ -29,7 +29,9 @@ def main(args=None):
     args = getArgs()
     if args.MAPFILE == 0:
         print(getArgs(1))
-        print("Map file not specified! Read the above contents to learn how to use this. Press Enter to continue.")
+        print("Map file not specified!",
+              "Read the above contents to learn how to use this.",
+              "Press Enter to continue.")
         input()
         sys.exit()
     
