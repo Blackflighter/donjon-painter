@@ -27,7 +27,7 @@ def printThemes():
 
 
 # Return desired theme folder
-def getFolder(curTile):
+def selTheme(curTile):
     themes = getThemes()
     options = range(0, len(themes))
     themeIndex = list(str(item) for item in options)
@@ -112,7 +112,7 @@ resources = {
 
 
 # Check if resource generation is possible
-def canGenerate(mapPath):
+def canGenerate(mapPath, primeRes=False):
     tmpRes = resources
 
     if Path(mapPath).is_dir:
@@ -126,13 +126,17 @@ def canGenerate(mapPath):
                 for suffix in fileTypes:
                     fileName = fileName + suffix
                     if Path(mapPath, fileName).is_file():
-                        tmpRes[superKey][assetKey] = Image.open(
-                            Path(mapPath, fileName)
-                        )
+                        if primeRes:
+                            tmpRes[superKey][assetKey] = Image.open(
+                                Path(mapPath, fileName)
+                            )
                         state = True
             sufficient.append(state)
 
-        return all(sufficient)
+        if primeRes:
+            return [all(sufficient), tmpRes]
+        else:
+            return all(sufficient)
     else:
         return False
 
@@ -140,9 +144,12 @@ def canGenerate(mapPath):
 # Supply a fully made theme if possible
 def generateTheme(mapPath):
 
-    tmpRes = resources
+    tmpRes = canGenerate(mapPath, True)
 
-    if canGenerate(mapPath):
+    if tmpRes[0] is not False:
+        # Dictionary with some open images
+        tmpRes = tmpRes[1]
+
         def rotateNone(im):
             return im
 
