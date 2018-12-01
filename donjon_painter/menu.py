@@ -1,6 +1,7 @@
 import themes
 
-# List of menu option functions
+
+# ========== List of menu option functions ========== #
 def setTSV(args):
     print("Current TSV file:", args.MAPFILE)
     print("Enter in the location + name of your TSV file.")
@@ -77,7 +78,7 @@ choices = {
         "Generate Map Image": genMap,
         "Exit Generator": progExit
     }
-# End of map menu options
+# ========== End of map menu options ========== #
 
 
 def getSettings(args):

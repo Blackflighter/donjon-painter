@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 # Retrieve list of theme directories
 def getThemes():
     themeList = []
@@ -27,11 +28,12 @@ def printThemes():
 # Return desired theme folder
 def getFolder(curTile):
     themes = getThemes()
+    options = range(0, len(themes))
     themeIndex = list(str(item) for item in options)
     selection = input()
 
     if selection in themeIndex:
-        curTile = themes[int(sel)]
+        curTile = themes[int(selection)]
     else:
         print("Invalid selection!")
     return curTile
