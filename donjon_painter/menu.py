@@ -16,7 +16,7 @@ def setTheme(args):
     getNative = input()
     if getNative == 'y' or getNative == 'Y':
         themes.printThemes()
-        args.tileset = themes.getFolder(args.tileset)
+        args.tileset = themes.selTheme(args.tileset)
     else:
         print("Enter in your theme directory.")
         args.tileset = input()
@@ -62,6 +62,7 @@ def genTheme(args):
 
 def genMap(args):
     print("Attempting map generation to", args.output)
+    imgmap.writeMap(args)
 
 
 def progExit():
@@ -122,3 +123,4 @@ def mainmenu(args):
                 choices[keyOpt]
         else:
             print("Invalid option!")
+    print("Exiting...")
