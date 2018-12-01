@@ -1,17 +1,33 @@
+import themes
+
 # List of menu option functions
 def setTSV(args):
     print("Current TSV file:", args.MAPFILE)
     print("Enter in the location + name of your TSV file.")
+    args.MAPFILE = input()
+    return args
 
 
 def setTheme(args):
     print("Current theme:", args.tileset)
     print("Get inbuilt theme? (y/N)")
 
+    getNative = input()
+    if getNative == 'y' or getNative == 'Y':
+        themes.printThemes()
+        args.tileset = themes.getFolder(args.tileset)
+    else:
+        print("Enter in your theme directory.")
+        args.tileset = input()
+
+    return args
+
 
 def setSave(args):
     print("Current save directory:", args.savetiles)
-    print("Enter in the location to save your map image.")
+    print("Enter name/location/location + name to save your map image.")
+    args.savetiles = input()
+    return args
 
 
 def setSize(args):
@@ -22,10 +38,10 @@ def setSize(args):
     if newSize.isdigit():
         args.pixels = int(newSize)
         print("Size set to", newSize)
-        return args
     else:
         print("Invalid input!")
-        return args
+
+    return args
 
 
 def togMetric(args):
