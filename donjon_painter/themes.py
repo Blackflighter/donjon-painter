@@ -112,7 +112,7 @@ resources = {
 
 
 # Check if resource generation is possible
-def canGenerate(mapPath, primeRes=False):
+def canGenerate(mapPath, openImages=False):
     tmpRes = resources
 
     if Path(mapPath).is_dir:
@@ -126,14 +126,14 @@ def canGenerate(mapPath, primeRes=False):
                 for suffix in fileTypes:
                     fileName = fileName + suffix
                     if Path(mapPath, fileName).is_file():
-                        if primeRes:
+                        if openImages:
                             tmpRes[superKey][assetKey] = Image.open(
                                 Path(mapPath, fileName)
                             )
                         state = True
             sufficient.append(state)
 
-        if primeRes:
+        if openImages:
             return [all(sufficient), tmpRes]
         else:
             return all(sufficient)
