@@ -21,6 +21,7 @@ def readMap(mapfile):
 def parseMap(arrMap):
     # Symbols that need more parsing (multiple outcomes)
     nameList = {
+        'S':        ['spaceAssets', 'dungeonSpace'],
         'WT':       ['wallAssets', 'wallTop'],
         'WB':       ['wallAssets', 'wallBottom'],
         'WL':       ['wallAssets', 'wallLeft'],
@@ -53,7 +54,6 @@ def parseMap(arrMap):
 
     # One to one symbols (no function needed)
     txtSymbols = {
-        'S':    ['spaceAssets', 'dungeonSpace'],
         'F':    ['floorAssets', 'floor'],
         'DT':   ['doorAssets', 'doorTop'],
         'DB':   ['doorAssets', 'doorBottom'],
@@ -108,17 +108,15 @@ def parseMap(arrMap):
                    (mapPart['SE'], mapPart['S'], mapPart['E']),
                    (mapPart['SW'], mapPart['S'], mapPart['W']),
                    (mapPart['NW'], mapPart['N'], mapPart['W'])]
+        space = [mapPart['NW'], mapPart['N'],   mapPart['NE'],
+                 mapPart['W'],  mapPart['M'],   mapPart['E'],
+                 mapPart['SW'], mapPart['S'],   mapPart['SE']]
 
         wallArray = []
 
-        # Empty space always present
-        wallArray.append(txtSymbols['S'])
-
-        # Straight walls
-        wallType = ['WT', 'WB', 'WL', 'WR']
-        for i, edge in enumerate(edges):
-            if edge == ['F']:
-                wallArray.append(wallType[i])
+        # Empty space if everything blank
+        if space == ['', '', '', '', '', '', '', '', '']:
+            wallArray.append(nameList['S'])
 
         # Inwards corner walls
         cornerTypeI = ['ITR', 'IBR', 'IBL', 'ITL']
@@ -131,6 +129,12 @@ def parseMap(arrMap):
         for i, corner in enumerate(corners):
             if corner == ['F', '', '']:
                 wallArray.append(nameList[cornerTypeO[i]])
+
+        # Straight walls
+        wallType = ['WT', 'WB', 'WL', 'WR']
+        for i, edge in enumerate(edges):
+            if edge == ['F']:
+                wallArray.append(nameList[wallType[i]])
 
         return wallArray
 
