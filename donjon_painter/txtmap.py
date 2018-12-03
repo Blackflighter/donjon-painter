@@ -204,6 +204,6 @@ def parseMap(arrMap):
             if tile in funcSymbols:
                 rowList.append(funcSymbols[tile](arrMap, row, col))
             else:
-                rowList.append(txtSymbols[tile])
+                rowList.append([txtSymbols[tile]])
         parsedList.append(rowList)
     return parsedList

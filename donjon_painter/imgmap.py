@@ -40,28 +40,28 @@ def generateMap(args):
         tmpImage = Image.new('RGBA', (width, height))
         if mapBlocks is not False:
             for row, tileMap in enumerate(resFile):
+                print("tileMap:", tileMap)
                 yPos = row * args.pixels
                 # Loop through tile resources in single tile
                 for col, tileArray in enumerate(tileMap):
                     xPos = col * args.pixels
+                    print(col, row)
                     # Merge resources if there's more than one
                     if len(tileArray) > 1:
                         tileImage = Image.new(
                             'RGBA', (args.pixels, args.pixels)
                         )
                         for pos, imgCur in enumerate(tileArray):
-                            if pos != (len(tileArray) - 1):
-                                imgNext = tileArray[pos+1]
-                                print(imgCur)
-                                print()
-                                print(imgNext)
-                                bg = mapBlocks[imgCur[0]][imgCur[1]].convert(
-                                    'RGBA'
-                                )
-                                fg = mapBlocks[imgNext[0]][imgNext[1]].convert(
-                                    'RGBA'
-                                )
-                                tileImage = Image.alpha_composite(bg, fg)
+                            if pos == (len(tileArray) - 1):
+                                break
+                            imgNext = tileArray[pos+1]
+                            bg = mapBlocks[imgCur[0]][imgCur[1]]
+                            if bg.mode != 'RGBA':
+                                bg = bg.convert('RGBA')
+                            fg = mapBlocks[imgNext[0]][imgNext[1]]
+                            if fg.mode != 'RGBA':
+                                fg = fg.convert('RGBA')
+                            tileImage = Image.alpha_composite(bg, fg)
                         tmpImage.paste(im=tileImage, box=(xPos, yPos))
                     else:
                         # Floor tile randomising
