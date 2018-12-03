@@ -1,5 +1,6 @@
 import themes
 import imgmap
+import time
 
 
 # ==================== List of menu option functions ==================== #
@@ -58,14 +59,24 @@ def togRandom(args):
 
 def genTheme(args):
     print("Attempting theme generation at", args.tileset)
+    start = time.time()
     if themes.writeTheme(args.tileset) is False:
         print("Insufficient resources to generate theme.")
+    else:
+        if args.measure:
+            end = time.time()
+            print("Done in", end - start, "seconds.")
 
 
 def genMap(args):
     print("Attempting map generation to", args.output)
+    start = time.time()
     if imgmap.writeMap(args) is False:
         print("Insufficient resources to generate map.")
+    else:
+        if args.measure:
+            end = time.time()
+            print("Done in", end - start, "seconds.")
 
 
 def progExit():
