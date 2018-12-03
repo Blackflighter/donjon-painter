@@ -75,45 +75,59 @@ def parseMap(arrMap):
         maxX = len(m[y]) - 1
 
         minimap = {
-            'NW':   m[y-1][x-1],    'N': m[y-1][x], 'NE': m[y-1][x+1],
-            'W':    m[y][x-1],      'M': m[y][x],   'E': m[y][x+1],
-            'SW':   m[y+1][x-1],    'S': m[y+1][x], 'SE': m[y+1][x+1]
+            'NW':   '_',   'N': '_',      'NE': '_',
+            'W':    '_',   'M': m[y][x],   'E': '_',
+            'SW':   '_',   'S': '_',      'SE': '_'
         }
 
-        # N, E, S, W, NE, SE, SW, NW
-        checks = [[y, 0],
-                  [x, maxX],
-                  [y, maxY],
-                  [x, 0],
-                  [y, 0, x, maxX],
-                  [y, maxY, x, maxX],
-                  [y, maxY, x, 0],
-                  [y, 0, x, 0]]
+        def setCardinal(mapfile, coord, pos, cond, yAdj, xAdj):
+            if pos != cond:
+                mapfile[coord] = m[y + yAdj][x + xAdj]
+            return mapfile
 
-        for i, (key, val) in enumerate(minimap.items()):
-            curCheck = checks[i]
-            if len(curCheck) == 2:
-                if curCheck[0] == curCheck[1]:
-                    minimap[key] = None
-            else:
-                if curCheck[0] == curCheck[1] and curCheck[2] == curCheck[3]:
-                    minimap[key] = None
+        def setInterCard(mapfile, coord, pos, cond1, cond2, yAdj, xAdj):
+            if pos[0] != cond1 and pos[1] != cond2:
+                mapfile[coord] = m[y + yAdj][x + xAdj]
+            return mapfile
+
+        minimap = setCardinal(minimap, 'N', y, 0, -1, 0)
+        minimap = setCardinal(minimap, 'E', x, maxX, 0, 1)
+        minimap = setCardinal(minimap, 'S', y, maxY, 1, 0)
+        minimap = setCardinal(minimap, 'W', x, 0, 0, -1)
+        minimap = setInterCard(minimap, 'NE', (y, x), 0, maxX, -1, 1)
+        minimap = setInterCard(minimap, 'SE', (y, x), maxY, maxX, 1, 1)
+        minimap = setInterCard(minimap, 'SW', (y, x), maxY, 0, 1, -1)
+        minimap = setInterCard(minimap, 'NW', (y, x), 0, 0, -1, -1)
+
         return minimap
 
     # Wall/space tiles needed
     def getWall(mapfile, yPos, xPos):
         mapPart = getCoordinates(mapfile, yPos, xPos)
-        edges = [mapPart['N'], mapPart['E'], mapPart['S'], mapPart['W']]
-        corners = [(mapPart['NE'], mapPart['N'], mapPart['E']),
-                   (mapPart['SE'], mapPart['S'], mapPart['E']),
-                   (mapPart['SW'], mapPart['S'], mapPart['W']),
-                   (mapPart['NW'], mapPart['N'], mapPart['W'])]
+        edges = [mapPart['N'], mapPart['S'], mapPart['W'], mapPart['E']]
+        corners = [[mapPart['NE'], mapPart['N'], mapPart['E']],
+                   [mapPart['SE'], mapPart['S'], mapPart['E']],
+                   [mapPart['SW'], mapPart['S'], mapPart['W']],
+                   [mapPart['NW'], mapPart['N'], mapPart['W']]]
         space = [mapPart['NW'], mapPart['N'],   mapPart['NE'],
                  mapPart['W'],  mapPart['M'],   mapPart['E'],
                  mapPart['SW'], mapPart['S'],   mapPart['SE']]
 
         wallArray = []
 
+        # Tile logic (treat other tiles as 'floor')
+        for key, items in enumerate(edges):
+            if items != '':
+                if (items[0] == 'D' or items[0] == 'S') and items != '_':
+                    edges[key] = 'F'
+        for supKey, items in enumerate(corners):
+            for key, part in enumerate(items):
+                if items != '':
+                    if (items[0] == 'D' or items[0] == 'S') and items != '_':
+                        corners[supKey][key] = 'F'
+        for key, items in enumerate(space):
+            if items == '_':
+                space[key] = ''
         # Empty space if everything blank
         if space == ['', '', '', '', '', '', '', '', '']:
             wallArray.append(nameList['S'])
@@ -133,7 +147,7 @@ def parseMap(arrMap):
         # Straight walls
         wallType = ['WT', 'WB', 'WL', 'WR']
         for i, edge in enumerate(edges):
-            if edge == ['F']:
+            if edge == 'F':
                 wallArray.append(nameList[wallType[i]])
 
         return wallArray

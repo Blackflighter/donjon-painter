@@ -7,7 +7,7 @@ def getThemes():
     themeList = []
 
     imgLoc = Path(__file__).parent.resolve()
-    imgLoc = Path(imgLoc, 'theme')
+    imgLoc = Path(imgLoc, 'themes')
 
     for item in imgLoc.iterdir():
             if item.is_dir():
@@ -23,7 +23,7 @@ def printThemes():
     print("===Theme List===")
     for key, item in enumerate(curList):
         themeName = item.parts
-        print("\t[" + str(key) + "]: " + themeName[-1])
+        print("[" + str(key) + "]: " + themeName[-1])
 
 
 # Return desired theme folder
@@ -36,7 +36,7 @@ def selTheme(curTile):
     if selection in themeIndex:
         curTile = themes[int(selection)]
     else:
-        print("Invalid selection!")
+        curTile = False
     return curTile
 
 
@@ -117,18 +117,18 @@ def canGenerate(mapPath, openImages=False):
 
     if Path(mapPath).is_dir:
         sufficient = []
-        fileTypes = ['.png', 'jpg', 'jpeg']
+        fileTypes = ['.png', '.jpg', '.jpeg']
         # Different asset types
         for superKey, val in tmpRes.items():
             # Asset type members
             state = False
             for assetKey, fileName in val.items():
                 for suffix in fileTypes:
-                    fileName = fileName + suffix
-                    if Path(mapPath, fileName).is_file():
+                    tmpName = fileName + suffix
+                    if Path(mapPath, tmpName).is_file():
                         if openImages:
                             tmpRes[superKey][assetKey] = Image.open(
-                                Path(mapPath, fileName)
+                                Path(mapPath, tmpName)
                             )
                         state = True
             sufficient.append(state)
@@ -201,10 +201,13 @@ def generateTheme(mapPath):
             imgIndex = ''
             transposee = ''
             for i, (assetKey, img) in enumerate(val.items()):
-                if img is Image:
+                try:
+                    img.size
                     imgIndex = i
                     transposee = img
                     break
+                except:
+                    pass
             # Create other assets from found one
             for i, (assetKey, img) in enumerate(val.items()):
                 if img is not Image:

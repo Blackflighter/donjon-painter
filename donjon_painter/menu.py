@@ -1,13 +1,14 @@
 import themes
 import imgmap
 import time
+from pathlib import Path
 
 
 # ==================== List of menu option functions ==================== #
 def setTSV(args):
     print("Current TSV file:", args.MAPFILE)
     print("Enter in the location + name of your TSV file.")
-    args.MAPFILE = input()
+    args.MAPFILE = str(Path(input()).expanduser())
     return args
 
 
@@ -18,7 +19,9 @@ def setTheme(args):
     getNative = input()
     if getNative == 'y' or getNative == 'Y':
         themes.printThemes()
-        args.tileset = themes.selTheme(args.tileset)
+        tmpTheme = themes.selTheme(args.tileset)
+        if tmpTheme is not False:
+            args.tileset = tmpTheme
     else:
         print("Enter in your theme directory.")
         args.tileset = input()
@@ -28,7 +31,7 @@ def setTheme(args):
 
 def setSave(args):
     print("Current save directory:", args.savetiles)
-    print("Enter name/location/location + name to save your map image.")
+    print("Enter [name]/[location]/[location + name] to save your map image.")
     args.savetiles = input()
     return args
 
@@ -42,7 +45,8 @@ def setSize(args):
         args.pixels = int(newSize)
         print("Size set to", newSize)
     else:
-        print("Invalid input!")
+        print("Invalid input! (Press Enter to continue.)")
+        input()
 
     return args
 
@@ -58,25 +62,35 @@ def togRandom(args):
 
 
 def genTheme(args):
-    print("Attempting theme generation at", args.tileset)
-    start = time.time()
-    if themes.writeTheme(args.tileset) is False:
-        print("Insufficient resources to generate theme.")
+    if args.tileset is not None:
+        print("Attempting theme generation at", args.tileset)
+        start = time.time()
+        if themes.writeTheme(args.tileset) is False:
+            print("Insufficient resources found. (Press Enter to continue)")
+        else:
+            if args.measure:
+                end = time.time()
+                print("Done in", end - start, "seconds.")
     else:
-        if args.measure:
-            end = time.time()
-            print("Done in", end - start, "seconds.")
+        print("Specify tileset folder! (Press Enter to continue)")
+        input()
+    return args
 
 
 def genMap(args):
-    print("Attempting map generation to", args.output)
-    start = time.time()
-    if imgmap.writeMap(args) is False:
-        print("Insufficient resources to generate map.")
+    if args.MAPFILE is not None and args.tileset is not None:
+        print("Attempting map generation to", args.output)
+        start = time.time()
+        if imgmap.writeMap(args) is False:
+            print("Insufficient resources found. (Press Enter to continue)")
+        else:
+            if args.measure:
+                end = time.time()
+                print("Done in", end - start, "seconds.")
     else:
-        if args.measure:
-            end = time.time()
-            print("Done in", end - start, "seconds.")
+        print("Specify more details! (Press Enter to continue)")
+        input()
+    return args
 
 
 def progExit():
@@ -99,42 +113,40 @@ choices = {
 
 def getSettings(args):
     optList = {
-        "TSV Map File": args.MAPFILE,
-        "Tile Theme Folder": args.tileset,
-        "Save Location": args.output,
-        "Tile Size (Pixels)": args.pixels,
-        "Measure Save Time": args.measure,
-        "Shuffle Floor": args.randomise,
-        "Generate Theme": args.savetiles
+        "TSV Map File\t\t:": args.MAPFILE,
+        "Tile Theme Folder\t:": args.tileset,
+        "Save Location\t\t:": args.output,
+        "Tile Size (Pixels)\t:": args.pixels,
+        "Measure Save Time\t:": args.measure,
+        "Shuffle Floor\t\t:": args.randomise
     }
     for i, val in optList.items():
-        print(i + ':\t', val)
+        print(i, val)
 
 
 def getOptions():
     for i, (key, val) in enumerate(choices.items()):
-        print('[' + i + ']', key)
+        print('[' + str(i) + ']', key)
 
 
 def mainmenu(args):
     option = None
     while option != (len(choices) - 1):
+        print("========== Current Settings ==========")
         getSettings(args)
         print()
         getOptions()
-        print("Select option: ", end='')
+        print("Select option: ")
 
         tmpOpt = input()
         # Execute linked option
-        if input().isdigit():
+        if tmpOpt.isdigit():
+            optList = list(choices.keys())
             option = int(tmpOpt)
-            keyOpt = list(choices)[option]
 
             # No arguments for exiting
-            if keyOpt < len((choices) - 2):
-                args = choices[keyOpt](args)
-            else:
-                choices[keyOpt]
-        else:
-            print("Invalid option!")
+            if option < (len(optList) - 1):
+                args = choices[optList[option]](args)
+            elif option == (len(optList) - 1):
+                choices[optList[option]]
     print("Exiting...")

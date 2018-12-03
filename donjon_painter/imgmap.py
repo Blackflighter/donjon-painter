@@ -1,5 +1,6 @@
 from pathlib import Path
 from PIL import Image
+from random import choice
 import themes
 import txtmap
 
@@ -10,6 +11,9 @@ def generateMap(args):
     resFile = txtmap.parseMap(rawFile)
 
     # Theme map
+    if args.tileset is None:
+        themes.printThemes()
+        args.tileset = themes.selTheme(args.tileset)
     mapBlocks = themes.generateTheme(args.tileset)
 
     if mapBlocks is not False:
@@ -46,18 +50,38 @@ def generateMap(args):
                             'RGBA', (args.pixels, args.pixels)
                         )
                         for pos, imgCur in enumerate(tileArray):
-                            imgNext = tileArray[pos+1]
                             if pos != (len(tileArray) - 1):
-                                tileImage = Image.alpha_composite(
-                                    mapBlocks[imgCur[0]][imgCur[1]],
-                                    mapBlocks[imgNext[0]][imgNext[1]]
+                                imgNext = tileArray[pos+1]
+                                print(imgCur)
+                                print()
+                                print(imgNext)
+                                bg = mapBlocks[imgCur[0]][imgCur[1]].convert(
+                                    'RGBA'
                                 )
+                                fg = mapBlocks[imgNext[0]][imgNext[1]].convert(
+                                    'RGBA'
+                                )
+                                tileImage = Image.alpha_composite(bg, fg)
                         tmpImage.paste(im=tileImage, box=(xPos, yPos))
                     else:
-                        tmpImage.paste(
-                            im=mapBlocks[tileArray[0]][tileArray[1]],
-                            box=(xPos, yPos)
-                        )
+                        # Floor tile randomising
+                        tileCat = tileArray[0][0]
+                        tileNam = tileArray[0][1]
+                        if args.randomise:
+                            if mapBlocks[tileCat][tileNam] == 'floor':
+                                floorImg = mapBlocks[tileCat][tileNam]
+                                floorImg = choice(
+                                    floorImg,
+                                    floorImg.transpose(Image.ROTATE_90),
+                                    floorImg.transpose(Image.ROTATE_180),
+                                    floorImg.transpose(Image.ROTATE_270)
+                                )
+                                tmpImage.paste(im=floorImg, box=(xPos, yPos))
+                        else:
+                            tmpImage.paste(
+                                im=mapBlocks[tileCat][tileNam],
+                                box=(xPos, yPos)
+                            )
         return tmpImage
     else:
         return False
