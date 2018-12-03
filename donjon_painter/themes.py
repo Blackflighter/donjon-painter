@@ -230,4 +230,4 @@ def writeTheme(mapPath):
                     asset.save(saveLoc)
         print("Theme saved!")
     else:
-        print("Insufficient resources to generate theme.")
+        return False

@@ -58,12 +58,14 @@ def togRandom(args):
 
 def genTheme(args):
     print("Attempting theme generation at", args.tileset)
-    themes.writeTheme(args.tileset)
+    if themes.writeTheme(args.tileset) is False:
+        print("Insufficient resources to generate theme.")
 
 
 def genMap(args):
     print("Attempting map generation to", args.output)
-    imgmap.writeMap(args)
+    if imgmap.writeMap(args) is False:
+        print("Insufficient resources to generate map.")
 
 
 def progExit():
