@@ -13,7 +13,7 @@ def generateMap(args):
     # Theme map
     mapBlocks = themes.generateTheme(args.tileset)
 
-    if mapBlocks is not False:
+    if mapBlocks is not False and resFile != []:
         # Scale theme tiles to desired size
         for supKey, category in mapBlocks.items():
             for key, img in category.items():

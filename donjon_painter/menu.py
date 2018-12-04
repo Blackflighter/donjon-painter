@@ -1,13 +1,14 @@
 import themes
 import imgmap
 import time
+import os
 from pathlib import Path
 
 
 # ==================== List of menu option functions ==================== #
 def setTSV(args):
     print("Current TSV file:", args.MAPFILE)
-    print("Enter in the location + name of your TSV file.")
+    print("Enter in the location + name of your TSV file:")
     args.MAPFILE = str(Path(input()).expanduser())
     return args
 
@@ -23,7 +24,7 @@ def setTheme(args):
         if tmpTheme is not False:
             args.tileset = tmpTheme
     else:
-        print("Enter in your theme directory.")
+        print("Enter in your theme directory:")
         args.tileset = input()
 
     return args
@@ -31,14 +32,14 @@ def setTheme(args):
 
 def setSave(args):
     print("Current save directory:", args.savetiles)
-    print("Enter [name]/[location]/[location + name] to save your map image.")
+    print("Enter [name]/[location]/[location + name] to save your map image:")
     args.savetiles = input()
     return args
 
 
 def setSize(args):
     print("Current tile size:", args.pixels)
-    print("Enter in the new size of your tiles.")
+    print("Enter in the new size of your tiles:")
 
     newSize = input()
     if newSize.isdigit():
@@ -71,6 +72,8 @@ def genTheme(args):
             if args.measure:
                 end = time.time()
                 print("Done in", end - start, "seconds.")
+            print("Complete! (Press Enter to continue)")
+            input()
     else:
         print("Specify tileset folder! (Press Enter to continue)")
         input()
@@ -83,10 +86,13 @@ def genMap(args):
         start = time.time()
         if imgmap.writeMap(args) is False:
             print("Insufficient resources found. (Press Enter to continue)")
+            input()
         else:
             if args.measure:
                 end = time.time()
                 print("Done in", end - start, "seconds.")
+            print("Complete! (Press Enter to continue)")
+            input()
     else:
         print("Specify more details! (Press Enter to continue)")
         input()
@@ -94,7 +100,7 @@ def genMap(args):
 
 
 def progExit():
-    print("Exiting menu...")
+    pass
 
 
 choices = {
@@ -132,6 +138,7 @@ def getOptions():
 def mainmenu(args):
     option = None
     while option != (len(choices) - 1):
+        os.system('cls' if os.name == 'nt' else 'clear')
         print("========== Current Settings ==========")
         getSettings(args)
         print()
