@@ -11,9 +11,6 @@ def generateMap(args):
     resFile = txtmap.parseMap(rawFile)
 
     # Theme map
-    if args.tileset is None:
-        themes.printThemes()
-        args.tileset = themes.selTheme(args.tileset)
     mapBlocks = themes.generateTheme(args.tileset)
 
     if mapBlocks is not False:
@@ -33,19 +30,17 @@ def generateMap(args):
                     )
 
         # Get width & height of image
-        width = len(rawFile) * args.pixels
-        height = len(rawFile[0]) * args.pixels
+        width = len(rawFile[0]) * args.pixels
+        height = len(rawFile) * args.pixels
 
         # Paste images onto blank canvas
         tmpImage = Image.new('RGBA', (width, height))
         if mapBlocks is not False:
             for row, tileMap in enumerate(resFile):
-                print("tileMap:", tileMap)
                 yPos = row * args.pixels
                 # Loop through tile resources in single tile
                 for col, tileArray in enumerate(tileMap):
                     xPos = col * args.pixels
-                    print(col, row)
                     # Merge resources if there's more than one
                     if len(tileArray) > 1:
                         tileImage = Image.new(
@@ -56,27 +51,25 @@ def generateMap(args):
                                 break
                             imgNext = tileArray[pos+1]
                             bg = mapBlocks[imgCur[0]][imgCur[1]]
-                            if bg.mode != 'RGBA':
-                                bg = bg.convert('RGBA')
                             fg = mapBlocks[imgNext[0]][imgNext[1]]
-                            if fg.mode != 'RGBA':
-                                fg = fg.convert('RGBA')
-                            tileImage = Image.alpha_composite(bg, fg)
+                            tileImage = Image.alpha_composite(
+                                tileImage, bg)
+                            tileImage = Image.alpha_composite(
+                                tileImage, fg)
                         tmpImage.paste(im=tileImage, box=(xPos, yPos))
                     else:
                         # Floor tile randomising
                         tileCat = tileArray[0][0]
                         tileNam = tileArray[0][1]
-                        if args.randomise:
-                            if mapBlocks[tileCat][tileNam] == 'floor':
-                                floorImg = mapBlocks[tileCat][tileNam]
-                                floorImg = choice(
-                                    floorImg,
-                                    floorImg.transpose(Image.ROTATE_90),
-                                    floorImg.transpose(Image.ROTATE_180),
-                                    floorImg.transpose(Image.ROTATE_270)
-                                )
-                                tmpImage.paste(im=floorImg, box=(xPos, yPos))
+                        if args.randomise and tileNam == 'floor':
+                            floorImg = mapBlocks[tileCat][tileNam]
+                            floorImg = choice([
+                                floorImg,
+                                floorImg.transpose(Image.ROTATE_90),
+                                floorImg.transpose(Image.ROTATE_180),
+                                floorImg.transpose(Image.ROTATE_270)
+                            ])
+                            tmpImage.paste(im=floorImg, box=(xPos, yPos))
                         else:
                             tmpImage.paste(
                                 im=mapBlocks[tileCat][tileNam],
@@ -89,6 +82,7 @@ def generateMap(args):
 
 # Save map to a specific directory
 def writeMap(args):
+
     tmpMap = generateMap(args)
     if tmpMap is not False:
         defName = 'Map.png'
