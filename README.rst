@@ -19,7 +19,7 @@ Installation
 -----------
 Windows EXE
 -----------
-Windows users have the option of downloading an EXE version of the script, which can be found `over here`_. You'll need to run the EXE from the terminal - this can be done more easily by editing your `PATH`_ environment variable.
+Windows users have the option of downloading an EXE version of the script, which can be found `over here`_. If you wish to run the EXE in the terminal often, you can edit your `PATH`_ environment variable so you don't need to navigate to the program first.
 
 .. _over here: https://github.com/Blackflighter/donjon-painter/releases/
 .. _PATH: https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
