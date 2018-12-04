@@ -59,13 +59,19 @@ First of all, begin by heading to `donjon's Random Dungeon Generator`_ to genera
 ------------------
 2. Run the command
 ------------------
-Having done this, run donjon-painter. The most basic command for making the script run is to specify both the command and the map file of your choice:
+Having done this, run donjon-painter. By default, if you don't specify anything, it will default to interactive mode. This brings up a menu of options in the terminal, which you can then input.
+
+::
+
+    donjon-painter
+
+If you're using the EXE file, all you need to do is open it up, and this will bring you to interactive mode.
+
+A more advanced usage entails specifying both the command and the map file of your choice:
 
 ::
 
     donjon-painter [OPTIONS] MAPFILE
-
-If you're using the EXE file, you may have to specify the location of it beforehand to make things work.
 
 Options
 =======
