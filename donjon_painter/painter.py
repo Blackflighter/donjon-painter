@@ -43,13 +43,6 @@ def main(args=None):
 
     args = getArgs()
 
-    sys.path.insert(0, str(Path(__file__).parent.resolve()))
-
-    # Module Files
-    import menu
-    import themes
-    import imgmap
-
     # Execution Redux (Interactive Mode vs. Single Command Mode)
     if args.MAPFILE is None:
         menu.mainmenu(args)
@@ -82,6 +75,12 @@ import time
 from pathlib import Path
 
 if __name__ == "__main__":
+    # Separate Python files
+    import menu
+    import themes
+    import imgmap
+    main()
+else:
     sys.path.insert(0, str(Path(__file__).parent.resolve()))
 
 # Separate Python files
