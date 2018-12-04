@@ -14,7 +14,7 @@ setuptools.setup(
     description='Graphical map translator for donjon\'s Random Dungeon Generator TSV files.',
     long_description=long_description,
     url='https://github.com/Blackflighter/donjon-painter',
-    packages=setuptools.find_packages(exclude=['donjon_painter/old']),
+    packages=setuptools.find_packages(),
     include_package_data=True,
     package_dir={'donjon-painter': 'donjon_painter'},
     entry_points={
