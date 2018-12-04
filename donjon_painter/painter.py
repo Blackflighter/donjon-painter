@@ -85,4 +85,3 @@ else:
     import menu
     import themes
     import imgmap
-    main()
