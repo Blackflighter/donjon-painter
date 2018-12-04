@@ -55,18 +55,30 @@ def parseMap(arrMap):
     # One to one symbols (no function needed)
     txtSymbols = {
         'F':    [['floorAssets', 'floor']],
-        'DT':   [['floorAssets', 'floor'], ['doorAssets', 'doorTop']],
-        'DB':   [['floorAssets', 'floor'], ['doorAssets', 'doorBottom']],
-        'DL':   [['floorAssets', 'floor'], ['doorAssets', 'doorLeft']],
-        'DR':   [['floorAssets', 'floor'], ['doorAssets', 'doorRight']],
-        'DST':  [['floorAssets', 'floor'], ['doorSAssets', 'doorSecretTop']],
-        'DSB':  [['floorAssets', 'floor'], ['doorSAssets', 'doorSecretBottom']],
-        'DSL':  [['floorAssets', 'floor'], ['doorSAssets', 'doorSecretLeft']],
-        'DSR':  [['floorAssets', 'floor'], ['doorSAssets', 'doorSecretRight']],
-        'DPT':  [['floorAssets', 'floor'], ['doorPAssets', 'doorPortTop']],
-        'DPB':  [['floorAssets', 'floor'], ['doorPAssets', 'doorPortBottom']],
-        'DPL':  [['floorAssets', 'floor'], ['doorPAssets', 'doorPortLeft']],
-        'DPR':  [['floorAssets', 'floor'], ['doorPAssets', 'doorPortRight']]
+        'DT':   [['floorAssets', 'floor'],
+                 ['doorAssets', 'doorTop']],
+        'DB':   [['floorAssets', 'floor'],
+                 ['doorAssets', 'doorBottom']],
+        'DL':   [['floorAssets', 'floor'],
+                 ['doorAssets', 'doorLeft']],
+        'DR':   [['floorAssets', 'floor'],
+                 ['doorAssets', 'doorRight']],
+        'DST':  [['floorAssets', 'floor'],
+                 ['doorSAssets', 'doorSecretTop']],
+        'DSB':  [['floorAssets', 'floor'],
+                 ['doorSAssets', 'doorSecretBottom']],
+        'DSL':  [['floorAssets', 'floor'],
+                 ['doorSAssets', 'doorSecretLeft']],
+        'DSR':  [['floorAssets', 'floor'],
+                 ['doorSAssets', 'doorSecretRight']],
+        'DPT':  [['floorAssets', 'floor'],
+                 ['doorPAssets', 'doorPortTop']],
+        'DPB':  [['floorAssets', 'floor'],
+                 ['doorPAssets', 'doorPortBottom']],
+        'DPL':  [['floorAssets', 'floor'],
+                 ['doorPAssets', 'doorPortLeft']],
+        'DPR':  [['floorAssets', 'floor'],
+                 ['doorPAssets', 'doorPortRight']]
     }
 
     # Return dictionary of items + adjacent letters (mapfile, position)
