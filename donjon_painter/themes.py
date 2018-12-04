@@ -206,7 +206,7 @@ def generateTheme(mapPath):
                     imgIndex = i
                     transposee = img
                     break
-                except:
+                finally:
                     pass
             # Create other assets from found one
             for i, (assetKey, img) in enumerate(val.items()):
