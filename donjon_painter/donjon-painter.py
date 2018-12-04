@@ -54,6 +54,9 @@ def main(args=None):
     if args.MAPFILE is None:
         menu.mainmenu(args)
     else:
+        if args.tileset is None:
+            themes.printThemes()
+            args.tileset = themes.selTheme(args.tileset)
         if args.savetiles:
             start = time.time()
             if themes.writeTheme(args.tileset) is False:
@@ -62,9 +65,6 @@ def main(args=None):
                 if args.measure:
                     end = time.time()
                     print("Theme generation done in", end - start, "seconds.")
-        if args.tileset is None:
-            themes.printThemes()
-            args.tileset = themes.selTheme(args.tileset)
         if args.measure:
             start = time.time()
         if imgmap.writeMap(args) is False:

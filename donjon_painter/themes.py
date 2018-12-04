@@ -1,5 +1,6 @@
 from pathlib import Path
 from PIL import Image
+import copy
 
 
 # Retrieve list of theme directories
@@ -113,7 +114,7 @@ resources = {
 
 # Check if resource generation is possible
 def canGenerate(mapPath, openImages=False):
-    tmpRes = resources
+    tmpRes = copy.deepcopy(resources)
 
     if Path(mapPath).is_dir:
         sufficient = []
@@ -206,7 +207,7 @@ def generateTheme(mapPath):
                     imgIndex = i
                     transposee = img
                     break
-                finally:
+                except:
                     pass
             # Create other assets from found one
             for i, (assetKey, img) in enumerate(val.items()):
@@ -220,14 +221,12 @@ def generateTheme(mapPath):
 
 # Create a theme at the specified path
 def writeTheme(mapPath):
-    nameList = resources
-
-    # Image dictionary -> nameList names
     themeRes = generateTheme(mapPath)
     if themeRes is not False:
         for itemGroup, category in themeRes.items():
             for item, asset in category.items():
-                imgName = nameList[itemGroup][item] + asset.format.lower()
+                imgName = resources[itemGroup][item]
+                imgName = imgName + '.' + asset.format.lower()
                 saveLoc = Path(mapPath, imgName)
                 if not saveLoc.is_file():
                     asset.save(saveLoc)
