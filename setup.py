@@ -7,7 +7,7 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name='donjon-painter',
-    version='0.9',
+    version='0.9.1',
     author='Korvin Roganov',
     author_email='qualimerjudith@gmail.com',
     license='GPLv3',
@@ -19,7 +19,7 @@ setuptools.setup(
     package_dir={'donjon-painter': 'donjon_painter'},
     entry_points={
         'console_scripts': [
-            'donjon-painter = donjon_painter.__main__:main'
+            'donjon-painter = donjon_painter.painter:main'
         ]
     },
     python_requires='>=3.5',
