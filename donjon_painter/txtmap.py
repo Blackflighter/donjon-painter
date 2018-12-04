@@ -54,19 +54,19 @@ def parseMap(arrMap):
 
     # One to one symbols (no function needed)
     txtSymbols = {
-        'F':    ['floorAssets', 'floor'],
-        'DT':   ['doorAssets', 'doorTop'],
-        'DB':   ['doorAssets', 'doorBottom'],
-        'DL':   ['doorAssets', 'doorLeft'],
-        'DR':   ['doorAssets', 'doorRight'],
-        'DST':  ['doorSAssets', 'doorSecretTop'],
-        'DSB':  ['doorSAssets', 'doorSecretBottom'],
-        'DSL':  ['doorSAssets', 'doorSecretLeft'],
-        'DSR':  ['doorSAssets', 'doorSecretRight'],
-        'DPT':  ['doorPAssets', 'doorPortTop'],
-        'DPB':  ['doorPAssets', 'doorPortBottom'],
-        'DPL':  ['doorPAssets', 'doorPortLeft'],
-        'DPR':  ['doorPAssets', 'doorPortRight']
+        'F':    [['floorAssets', 'floor']],
+        'DT':   [['floorAssets', 'floor'], ['doorAssets', 'doorTop']],
+        'DB':   [['floorAssets', 'floor'], ['doorAssets', 'doorBottom']],
+        'DL':   [['floorAssets', 'floor'], ['doorAssets', 'doorLeft']],
+        'DR':   [['floorAssets', 'floor'], ['doorAssets', 'doorRight']],
+        'DST':  [['floorAssets', 'floor'], ['doorSAssets', 'doorSecretTop']],
+        'DSB':  [['floorAssets', 'floor'], ['doorSAssets', 'doorSecretBottom']],
+        'DSL':  [['floorAssets', 'floor'], ['doorSAssets', 'doorSecretLeft']],
+        'DSR':  [['floorAssets', 'floor'], ['doorSAssets', 'doorSecretRight']],
+        'DPT':  [['floorAssets', 'floor'], ['doorPAssets', 'doorPortTop']],
+        'DPB':  [['floorAssets', 'floor'], ['doorPAssets', 'doorPortBottom']],
+        'DPL':  [['floorAssets', 'floor'], ['doorPAssets', 'doorPortLeft']],
+        'DPR':  [['floorAssets', 'floor'], ['doorPAssets', 'doorPortRight']]
     }
 
     # Return dictionary of items + adjacent letters (mapfile, position)
@@ -122,8 +122,8 @@ def parseMap(arrMap):
                     edges[key] = 'F'
         for supKey, items in enumerate(corners):
             for key, part in enumerate(items):
-                if items != '':
-                    if (items[0] == 'D' or items[0] == 'S') and items != '_':
+                if part != '':
+                    if (part[0] == 'D' or part[0] == 'S') and part != '_':
                         corners[supKey][key] = 'F'
         for key, items in enumerate(space):
             if items == '_':
@@ -131,6 +131,12 @@ def parseMap(arrMap):
         # Empty space if everything blank
         if space == ['', '', '', '', '', '', '', '', '']:
             wallArray.append(nameList['S'])
+
+        # Straight walls
+        wallType = ['WT', 'WB', 'WL', 'WR']
+        for i, edge in enumerate(edges):
+            if edge == 'F':
+                wallArray.append(nameList[wallType[i]])
 
         # Inwards corner walls
         cornerTypeI = ['ITR', 'IBR', 'IBL', 'ITL']
@@ -144,22 +150,17 @@ def parseMap(arrMap):
             if corner == ['F', '', '']:
                 wallArray.append(nameList[cornerTypeO[i]])
 
-        # Straight walls
-        wallType = ['WT', 'WB', 'WL', 'WR']
-        for i, edge in enumerate(edges):
-            if edge == 'F':
-                wallArray.append(nameList[wallType[i]])
-
         return wallArray
 
     # Stair tiles needed
     def getStair(loc, stairType, stairKey):
         stairArray = []
-        stairArray.append(txtSymbols['F'])
+        stairArray.append(txtSymbols['F'][0])
 
         for i, loc in enumerate(loc):
             if loc == stairKey:
                 stairArray.append(nameList[stairType[i]])
+        return stairArray
 
     def getUStair(mapfile, yPos, xPos):
         mapPart = getCoordinates(mapfile, yPos, xPos)
@@ -204,6 +205,6 @@ def parseMap(arrMap):
             if tile in funcSymbols:
                 rowList.append(funcSymbols[tile](arrMap, row, col))
             else:
-                rowList.append([txtSymbols[tile]])
+                rowList.append(txtSymbols[tile])
         parsedList.append(rowList)
     return parsedList
