@@ -75,17 +75,13 @@ import time
 from pathlib import Path
 
 if __name__ == "__main__":
-    # Separate Python files
     import menu
     import themes
     import imgmap
     main()
 else:
     sys.path.insert(0, str(Path(__file__).parent.resolve()))
-
-# Separate Python files
-import menu
-import themes
-import imgmap
-
-main()
+    import menu
+    import themes
+    import imgmap
+    main()
