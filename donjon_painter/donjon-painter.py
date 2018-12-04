@@ -1,9 +1,3 @@
-import sys
-import argparse
-import time
-from pathlib import Path
-
-
 # Handle arguments
 def getArgs(showHelp=0):
     parser = argparse.ArgumentParser(
@@ -81,8 +75,18 @@ def main(args=None):
                 print("Map generation done in", end - start, "seconds.")
             print("Finished!")
 
+# Start here
+import sys
+import argparse
+import time
+from pathlib import Path
 
 if __name__ == "__main__":
-    main()
-else:
-    main()
+    sys.path.insert(0, str(Path(__file__).parent.resolve()))
+
+# Separate Python files
+import menu
+import themes
+import imgmap
+
+main()
