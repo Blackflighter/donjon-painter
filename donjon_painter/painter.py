@@ -3,6 +3,11 @@ import argparse
 import time
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent.resolve()))
+import menu
+import themes
+import imgmap
+
 
 # Handle arguments
 def getArgs(showHelp=0):
@@ -76,12 +81,4 @@ def main(args=None):
 
 
 if __name__ == "__main__":
-    import menu
-    import themes
-    import imgmap
     main()
-else:
-    sys.path.insert(0, str(Path(__file__).parent.resolve()))
-    import menu
-    import themes
-    import imgmap
