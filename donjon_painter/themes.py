@@ -209,7 +209,7 @@ def generateTheme(mapPath):
                     break
             # Create other assets from found one
             for i, (assetKey, img) in enumerate(val.items()):
-                if img is not isinstance(img, Image.Image):
+                if not isinstance(img, Image.Image):
                     tmpRes[key][assetKey] = rotate[imgIndex][i](transposee)
 
         return tmpRes
