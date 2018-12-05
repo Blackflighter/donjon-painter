@@ -21,7 +21,7 @@ Having chosen your selected theme, use the command below to make donjon-painter 
 
 The command above will create a map from one of donjon's randomly generated dungeons, using the folder of assets you provided it. It will then attempt to fill out any gaps it can, automatically rotating the remaining images needed, saving them to the folder.
 
-Alternatively, you can also open up donjon-painter in interactive mode (just run the program without any additional parameters), which will let you select your theme folder more dynamically. You'll need to go through a few options to generate your theme of choice.
+Alternatively, you can also open up donjon-painter in interactive mode (just run the program without any additional parameters), which will let you select your theme folder more dynamically. All you need to do is specify the directory of your theme folder. After doing so, select the option to generate your theme.
 
 ::
 

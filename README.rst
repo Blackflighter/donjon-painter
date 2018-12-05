@@ -73,6 +73,15 @@ A more advanced usage entails specifying both the command and the map file of yo
 
     donjon-painter [OPTIONS] MAPFILE
 
+------------------------------------
+3. [Optional] Using interactive mode
+------------------------------------
+Creating a map in interactive mode is a fairly simple process. You'll be given a set of options to choose from, marked numerically. All you need to do is input said number, and follow the instructions provided.
+
+At minimum, you must select your TSV file of choice, along with the theme you would like to use. Other options can be toggled/set if you'd like some further customisation.
+
+.. image:: /res/interactive.png
+
 Options
 =======
 There's a number of things you can do to change the behaviour of this script, as detailed below.
