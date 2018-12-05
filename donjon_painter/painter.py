@@ -6,6 +6,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.resolve()))
 import menu
 import themes
+import txtmap
 import imgmap
 
 
@@ -71,7 +72,12 @@ def main(args=None):
                     print("Theme generation done in", end - start, "seconds.")
         if args.measure:
             start = time.time()
-        if imgmap.writeMap(args) is False:
+
+        tmpMap = txtmap.readMap(args.MAPFILE)
+        tmpMap = txtmap.parseMap(tmpMap)
+        tmpMap = imgmap.generateMap(args, tmpMap)
+
+        if imgmap.writeMap(args, tmpMap) is False:
             print("Map cannot be saved - insufficient resources.")
         else:
             if args.measure:

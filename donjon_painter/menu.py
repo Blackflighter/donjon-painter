@@ -1,5 +1,6 @@
 import themes
 import imgmap
+import txtmap
 import os
 import time
 from pathlib import Path
@@ -84,7 +85,12 @@ def genMap(args):
     if args.MAPFILE is not None and args.tileset is not None:
         print("Attempting map generation to", args.output)
         start = time.time()
-        if imgmap.writeMap(args) is False:
+
+        tmpMap = txtmap.readMap(args.MAPFILE)
+        tmpMap = txtmap.parseMap(tmpMap)
+        tmpMap = imgmap.generateMap(args, tmpMap)
+
+        if imgmap.writeMap(args, tmpMap) is False:
             print("Insufficient resources found. (Press Enter to continue)")
             input()
         else:

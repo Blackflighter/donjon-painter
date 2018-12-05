@@ -2,14 +2,10 @@ from pathlib import Path
 from PIL import Image
 from random import choice
 import themes
-import txtmap
 
 
 # Actually create the map in question
-def generateMap(args):
-    rawFile = txtmap.readMap(args.MAPFILE)
-    resFile = txtmap.parseMap(rawFile)
-
+def generateMap(args, resFile):
     # Theme map
     mapBlocks = themes.generateTheme(args.tileset)
 
@@ -30,8 +26,8 @@ def generateMap(args):
                     )
 
         # Get width & height of image
-        width = len(rawFile[0]) * args.pixels
-        height = len(rawFile) * args.pixels
+        width = len(resFile[0]) * args.pixels
+        height = len(resFile) * args.pixels
 
         # Paste images onto blank canvas
         tmpImage = Image.new('RGBA', (width, height))
@@ -81,9 +77,8 @@ def generateMap(args):
 
 
 # Save map to a specific directory
-def writeMap(args):
+def writeMap(args, tmpMap):
 
-    tmpMap = generateMap(args)
     if tmpMap is not False:
         defName = 'Map.png'
         defLocs = Path.home()
