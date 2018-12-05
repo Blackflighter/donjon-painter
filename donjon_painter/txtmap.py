@@ -5,6 +5,8 @@ from pathlib import Path
 # Creates a 2D list from a TSV file
 def readMap(mapfile):
     tmpArray = []
+    if Path(mapfile).suffix != '.txt':
+        mapfile = mapfile + '.txt'
     if Path(mapfile).is_file():
         with open(mapfile) as fd:
             rd = csv.reader(fd, delimiter="\t")
