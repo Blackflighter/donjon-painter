@@ -1,6 +1,7 @@
 import themes
 import imgmap
 import os
+import time
 from pathlib import Path
 
 
@@ -64,10 +65,12 @@ def togRandom(args):
 def genTheme(args):
     if args.tileset is not None:
         print("Attempting theme generation at", args.tileset)
+        start = time.time()
         if themes.writeTheme(args.tileset) is False:
             print("Insufficient resources found. (Press Enter to continue)")
         else:
             if args.measure:
+                end = time.time()
                 print("Done in", end - start, "seconds.")
             print("Complete! (Press Enter to continue)")
             input()
@@ -80,11 +83,13 @@ def genTheme(args):
 def genMap(args):
     if args.MAPFILE is not None and args.tileset is not None:
         print("Attempting map generation to", args.output)
+        start = time.time()
         if imgmap.writeMap(args) is False:
             print("Insufficient resources found. (Press Enter to continue)")
             input()
         else:
             if args.measure:
+                end = time.time()
                 print("Done in", end - start, "seconds.")
             print("Complete! (Press Enter to continue)")
             input()
