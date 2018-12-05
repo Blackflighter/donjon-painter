@@ -33,7 +33,7 @@ def setTheme(args):
 def setSave(args):
     print("Current save directory:", args.savetiles)
     print("Enter [name]/[location]/[location + name] to save your map image:")
-    args.savetiles = input()
+    args.output = input()
     return args
 
 

@@ -87,17 +87,18 @@ def writeMap(args):
     if tmpMap is not False:
         defName = 'Map.png'
         defLocs = Path.home()
-        saveLoc = args.output
+        saveLoc = Path(args.output).expanduser()
+
         fileTypes = ['.png', '.jpg', '.jpeg']
 
-        if Path(args.output).is_dir():
-            saveLoc = Path(args.output, defName)
+        if saveLoc.is_dir():
+            saveLoc = Path(saveLoc, defName)
             tmpMap.save(saveLoc)
-        elif Path(args.output).parent.is_dir():
-            if Path(args.output).suffix in fileTypes:
+        elif saveLoc.parent.is_dir():
+            if saveLoc.suffix in fileTypes:
                 tmpMap.save(saveLoc)
             else:
-                saveLoc = args.output + '.png'
+                saveLoc = str(saveLoc) + '.png'
                 tmpMap.save(saveLoc)
         else:
             saveLoc = str(Path(defLocs, defName))
