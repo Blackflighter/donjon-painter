@@ -115,7 +115,6 @@ resources = {
 # Check if resource generation is possible
 def canGenerate(mapPath, openImages=False):
     tmpRes = copy.deepcopy(resources)
-    mapPath = str(Path(mapPath).expanduser().resolve())
 
     if Path(mapPath).is_dir:
         sufficient = []
@@ -203,7 +202,7 @@ def generateTheme(mapPath):
             imgIndex = ''
             transposee = ''
             for i, (assetKey, img) in enumerate(val.items()):
-                if img is isinstance(img, Image.Image):
+                if isinstance(img, Image.Image):
                     imgIndex = i
                     transposee = img
                     break

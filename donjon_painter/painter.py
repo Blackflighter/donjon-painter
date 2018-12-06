@@ -64,6 +64,7 @@ def main(args=None):
             args.tileset = themes.selTheme(args.tileset)
         if args.savetiles:
             start = time.time()
+            args.tileset = str(Path(args.tileset).expanduser())
             if themes.writeTheme(args.tileset) is False:
                 print("Theme cannot be saved - insufficient resources.")
             else:

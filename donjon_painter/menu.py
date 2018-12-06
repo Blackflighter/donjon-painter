@@ -26,7 +26,7 @@ def setTheme(args):
             args.tileset = tmpTheme
     else:
         print("Enter in your theme directory:")
-        args.tileset = input()
+        args.tileset = str(Path(input()).expanduser())
 
     return args
 
