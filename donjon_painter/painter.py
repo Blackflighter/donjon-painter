@@ -69,7 +69,7 @@ def main(args=None):
 
             tmpRes = themes.canGenerate(args.tileset, True)
             tmpRes = themes.generateTheme(tmpRes)
-            if themes.writeTheme(args.tileset) is False:
+            if themes.writeTheme(args.tileset, tmpRes) is False:
                 print("Theme cannot be saved - insufficient resources.")
             else:
                 if args.measure:
@@ -77,6 +77,8 @@ def main(args=None):
                     print("Theme generation done in", end - start, "seconds.")
         if args.measure:
             start = time.time()
+
+        print("Attempting map generation...")
 
         tmpTheme = themes.canGenerate(args.tileset, True)
         tmpTheme = themes.generateTheme(tmpTheme)

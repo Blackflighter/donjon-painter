@@ -64,26 +64,6 @@ def togRandom(args):
     return args
 
 
-'''
-def genTheme(args):
-    if args.tileset is not None:
-        print("Attempting theme generation at", args.tileset)
-        start = time.time()
-        if themes.writeTheme(args.tileset) is False:
-            print("Insufficient resources found. (Press Enter to continue)")
-        else:
-            if args.measure:
-                end = time.time()
-                print("Done in", end - start, "seconds.")
-            print("Complete! (Press Enter to continue)")
-            input()
-    else:
-        print("Specify tileset folder! (Press Enter to continue)")
-        input()
-    return args
-'''
-
-
 def genTheme(args):
     if args.tileset is not None:
         print("Attempting theme generation at", args.tileset)
