@@ -8,6 +8,7 @@ import menu
 import themes
 import txtmap
 import imgmap
+import parser
 
 
 # Handle arguments
@@ -54,6 +55,7 @@ def main(args=None):
         args = sys.argv[1:]
 
     args = getArgs()
+    args = parser.expandargs(args)
 
     # Execution Redux (Interactive Mode vs. Single Command Mode)
     if args.MAPFILE is None:
@@ -64,7 +66,9 @@ def main(args=None):
             args.tileset = themes.selTheme(args.tileset)
         if args.savetiles:
             start = time.time()
-            args.tileset = str(Path(args.tileset).expanduser())
+
+            tmpRes = themes.canGenerate(args.tileset, True)
+            tmpRes = themes.generateTheme(tmpRes)
             if themes.writeTheme(args.tileset) is False:
                 print("Theme cannot be saved - insufficient resources.")
             else:
@@ -74,9 +78,12 @@ def main(args=None):
         if args.measure:
             start = time.time()
 
+        tmpTheme = themes.canGenerate(args.tileset, True)
+        tmpTheme = themes.generateTheme(tmpTheme)
+
         tmpMap = txtmap.readMap(args.MAPFILE)
         tmpMap = txtmap.parseMap(tmpMap)
-        tmpMap = imgmap.generateMap(args, tmpMap)
+        tmpMap = imgmap.generateMap(args, tmpTheme, tmpMap)
 
         if imgmap.writeMap(args, tmpMap) is False:
             print("Map cannot be saved - insufficient resources.")

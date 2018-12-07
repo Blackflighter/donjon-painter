@@ -1,14 +1,10 @@
 from pathlib import Path
 from PIL import Image
 from random import choice
-import themes
 
 
 # Actually create the map in question
-def generateMap(args, resFile):
-    # Theme map
-    mapBlocks = themes.generateTheme(args.tileset)
-
+def generateMap(args, mapBlocks, resFile):
     if mapBlocks is not False and resFile != []:
         # Scale theme tiles to desired size
         for supKey, category in mapBlocks.items():

@@ -113,10 +113,10 @@ resources = {
 
 
 # Check if resource generation is possible
-def canGenerate(mapPath, openImages=False):
+def canGenerate(themePath, openImages=False):
     tmpRes = copy.deepcopy(resources)
 
-    if Path(mapPath).is_dir:
+    if Path(themePath).is_dir:
         sufficient = []
         fileTypes = ['.png', '.jpg', '.jpeg']
         # Different asset types
@@ -126,10 +126,10 @@ def canGenerate(mapPath, openImages=False):
             for assetKey, fileName in val.items():
                 for suffix in fileTypes:
                     tmpName = fileName + suffix
-                    if Path(mapPath, tmpName).is_file():
+                    if Path(themePath, tmpName).is_file():
                         if openImages:
                             tmpRes[superKey][assetKey] = Image.open(
-                                Path(mapPath, tmpName)
+                                Path(themePath, tmpName)
                             )
                         state = True
             sufficient.append(state)
@@ -143,10 +143,7 @@ def canGenerate(mapPath, openImages=False):
 
 
 # Supply a fully made theme if possible
-def generateTheme(mapPath):
-
-    tmpRes = canGenerate(mapPath, True)
-
+def generateTheme(tmpRes):
     if tmpRes[0] is not False:
         # Dictionary with some open images
         tmpRes = tmpRes[1]
@@ -217,14 +214,13 @@ def generateTheme(mapPath):
 
 
 # Create a theme at the specified path
-def writeTheme(mapPath):
-    themeRes = generateTheme(mapPath)
+def writeTheme(themePath, themeRes):
     if themeRes is not False:
         for itemGroup, category in themeRes.items():
             for item, asset in category.items():
                 imgName = resources[itemGroup][item]
                 imgName = imgName + '.' + asset.format.lower()
-                saveLoc = Path(mapPath, imgName)
+                saveLoc = Path(themePath, imgName)
                 if not saveLoc.is_file():
                     asset.save(saveLoc)
         print("Theme saved!")

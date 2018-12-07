@@ -1,6 +1,7 @@
 import themes
 import imgmap
 import txtmap
+import parser
 import os
 import time
 from pathlib import Path
@@ -63,11 +64,34 @@ def togRandom(args):
     return args
 
 
+'''
 def genTheme(args):
     if args.tileset is not None:
         print("Attempting theme generation at", args.tileset)
         start = time.time()
         if themes.writeTheme(args.tileset) is False:
+            print("Insufficient resources found. (Press Enter to continue)")
+        else:
+            if args.measure:
+                end = time.time()
+                print("Done in", end - start, "seconds.")
+            print("Complete! (Press Enter to continue)")
+            input()
+    else:
+        print("Specify tileset folder! (Press Enter to continue)")
+        input()
+    return args
+'''
+
+
+def genTheme(args):
+    if args.tileset is not None:
+        print("Attempting theme generation at", args.tileset)
+        start = time.time()
+
+        tmpRes = themes.canGenerate(args.tileset, True)
+        tmpRes = themes.generateTheme(tmpRes)
+        if themes.writeTheme(args.tileset, tmpRes) is False:
             print("Insufficient resources found. (Press Enter to continue)")
         else:
             if args.measure:
@@ -86,9 +110,12 @@ def genMap(args):
         print("Attempting map generation to", args.output)
         start = time.time()
 
+        tmpTheme = themes.canGenerate(args.tileset, True)
+        tmpTheme = themes.generateTheme(tmpTheme)
+
         tmpMap = txtmap.readMap(args.MAPFILE)
         tmpMap = txtmap.parseMap(tmpMap)
-        tmpMap = imgmap.generateMap(args, tmpMap)
+        tmpMap = imgmap.generateMap(args, tmpTheme, tmpMap)
 
         if imgmap.writeMap(args, tmpMap) is False:
             print("Insufficient resources found. (Press Enter to continue)")
@@ -156,6 +183,9 @@ def mainmenu(args):
         if tmpOpt.isdigit():
             optList = list(choices.keys())
             option = int(tmpOpt)
+
+            # Parse arguments
+            args = parser.expandargs(args)
 
             # No arguments for exiting
             if option < (len(optList) - 1):
