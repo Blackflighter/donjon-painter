@@ -10,7 +10,7 @@ license=('GPL3')
 depends=('python-pillow')
 makedepends=('python')
 _name=${pkgname#python-}
-source=("https://files.pythonhosted.org/packages/py3/${_name::1}/$_name/$_name-$pkgver-p3-none-any.whl")
+source=("https://files.pythonhosted.org/packages/source/${_name::1}/${_name}/${_name}-${pkgver}.tar.gz")
 sha256sums=('c8b1787a41c4dbbb869c633e5227a7f65005552bcce0b69e74680a480b6371b4')
 
 build() {
