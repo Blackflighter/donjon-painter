@@ -8,7 +8,7 @@ import menu
 import themes
 import txtmap
 import imgmap
-import parser
+import stretch
 
 
 # Handle arguments
@@ -55,7 +55,7 @@ def main(args=None):
         args = sys.argv[1:]
 
     args = getArgs()
-    args = parser.expandargs(args)
+    args = stretch.expandargs(args)
 
     # Execution Redux (Interactive Mode vs. Single Command Mode)
     if args.MAPFILE is None:

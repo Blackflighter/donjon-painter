@@ -1,7 +1,7 @@
 import themes
 import imgmap
 import txtmap
-import parser
+import stretch
 import os
 import time
 from pathlib import Path
@@ -165,7 +165,7 @@ def mainmenu(args):
             option = int(tmpOpt)
 
             # Parse arguments
-            args = parser.expandargs(args)
+            args = stretch.expandargs(args)
 
             # No arguments for exiting
             if option < (len(optList) - 1):
