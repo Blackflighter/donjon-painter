@@ -24,10 +24,24 @@ Windows users have the option of downloading an EXE version of the script, which
 .. _over here: https://github.com/Blackflighter/donjon-painter/releases/
 .. _PATH: https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
 
+------------------------
+AUR Package (Arch Linux)
+------------------------
+If you're using Arch Linux, a PKGBUILD is available `over here`_.
+
+.. _over here: https://aur.archlinux.org/packages/donjon-painter/
+
+----------------------
+RPM File (RHEL/Fedora)
+----------------------
+You can download RPM files `over here`_.
+
+.. _over here: https://github.com/Blackflighter/donjon-painter/releases/
+
 ---------
 Using pip
 ---------
-donjon-painter is `available on PyPI`_. Until I get to creating packages for different Linux distributions, this is the ideal way of using it on them. Get it using this command:
+donjon-painter is `available on PyPI`_. Get it using this command:
 
 ::
 
