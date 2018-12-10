@@ -9,7 +9,7 @@ setuptools.setup(
     name='donjon-painter',
     version='0.9.3',
     author='Korvin Roganov',
-    author_email='qualimerjudith@gmail.com',
+    author_email='korvinagor@vivaldi.net',
     license='GPLv3',
     description='Graphical map translator for donjon\'s Random Dungeon Generator TSV files.',
     long_description=long_description,
