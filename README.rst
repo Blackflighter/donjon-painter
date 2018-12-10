@@ -27,16 +27,16 @@ Windows users have the option of downloading an EXE version of the script, which
 ------------------------
 AUR Package (Arch Linux)
 ------------------------
-If you're using Arch Linux, a PKGBUILD is available `over here`_.
+If you're using Arch Linux, get the PKGBUILD `from here`_.
 
-.. _over here: https://aur.archlinux.org/packages/donjon-painter/
+.. _from here: https://aur.archlinux.org/packages/donjon-painter/
 
 ----------------------
 RPM File (RHEL/Fedora)
 ----------------------
-You can download RPM files `over here`_.
+`Download the requisite RPM file`_.
 
-.. _over here: https://github.com/Blackflighter/donjon-painter/releases/
+.. _Download the requisite RPM file: https://github.com/Blackflighter/donjon-painter/releases/
 
 ---------
 Using pip
