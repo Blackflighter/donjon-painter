@@ -67,7 +67,7 @@ Usage
 -------------------------
 First of all, begin by heading to `donjon's Random Dungeon Generator`_ to generate the dungeon of your liking. Having done that, you should select the option to download a TSV map of the generated file, as depicted below:
 
-.. image:: /res/donjon.png
+.. image:: https://raw.githubusercontent.com/Blackflighter/donjon-painter/master/res/donjon.png
 .. _donjon's Random Dungeon Generator: https://donjon.bin.sh/fantasy/dungeon/
 
 ------------------
@@ -94,7 +94,7 @@ Creating a map in interactive mode is a fairly simple process. You'll be given a
 
 At minimum, you must select your TSV file of choice, along with the theme you would like to use. Other options can be toggled/set if you'd like some further customisation.
 
-.. image:: /res/interactive.png
+.. image:: https://raw.githubusercontent.com/Blackflighter/donjon-painter/master/res/interactive.png
 
 Options
 =======
