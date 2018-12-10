@@ -1,1 +1,1 @@
-pyinstaller --name="donjon-painter-0.9.3" --paths="../donjon_painter" --add-data="../donjon_painter/themes;themes" --distpath="../dist" --upx-dir="./upx-3.95-win32" --workpath="../build" --onefile ..\donjon_painter\painter.py
+pyinstaller --name="donjon-painter-0.9.4" --paths="../donjon_painter" --add-data="../donjon_painter/themes;themes" --distpath="../dist" --upx-dir="./upx-3.95-win32" --workpath="../build" --onefile ..\donjon_painter\painter.py
