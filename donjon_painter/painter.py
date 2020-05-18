@@ -34,6 +34,7 @@ def getArgs(showHelp=0):
     parser.add_argument(
         "-p", "--pixels",
         help="specify the size of your map tile assets (default 70)",
+        type=int,
         default=70)
     parser.add_argument(
         "-r", "--randomise",
