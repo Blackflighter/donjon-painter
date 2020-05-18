@@ -1,10 +1,15 @@
 donjon-painter - Dungeon Map Maker
 ==================================
 
-donjon-painter is a companion script to `donjon's Random Dungeon Generator`_. By selecting a TSV file along with a set of tile assets, you can easily create large, beautiful dungeon maps. Learn how to create new tilesets for donjon-painter `here`_.
+This is a fork of the outdated `Blackflighter/donjon-painter`_.
 
+donjon-painter is a companion script to `donjon's Random Dungeon Generator`_.
+By selecting a TSV file along with a set of tile assets, you can easily create large, beautiful dungeon maps.
+Learn how to create new tilesets for donjon-painter `here`_.
+
+.. _Blackflighter/donjon-painter: https://github.com/Blackflighter/donjon-painter
 .. _donjon's Random Dungeon Generator: https://donjon.bin.sh/fantasy/dungeon/
-.. _here: https://github.com/Blackflighter/donjon-painter/blob/master/CONTRIBUTING.rst
+.. _here: https://github.com/donjon-painter/donjon-painter/blob/master/CONTRIBUTING.rst
 
 -------------
 Prerequisites
@@ -16,38 +21,31 @@ Prerequisites
 Installation
 ============
 
------------
-Windows EXE
------------
-Windows users have the option of downloading an EXE version of the script, which can be found `over here`_. If you wish to run the EXE in the terminal often, you can edit your `PATH`_ environment variable so you don't need to navigate to the program first.
+The packages provided in pyPI and the AUR are outdated.
 
-.. _over here: https://github.com/Blackflighter/donjon-painter/releases/
-.. _PATH: https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
+---------------
+Linux and MacOS
+---------------
 
-------------------------
-AUR Package (Arch Linux)
-------------------------
-If you're using Arch Linux, get the PKGBUILD `from here`_.
-
-.. _from here: https://aur.archlinux.org/packages/donjon-painter/
-
-----------------------
-RPM File (RHEL/Fedora)
-----------------------
-`Download the requisite RPM file`_.
-
-.. _Download the requisite RPM file: https://github.com/Blackflighter/donjon-painter/releases/
-
----------
-Using pip
----------
-donjon-painter is `available on PyPI`_. Get it using this command:
+Download the appropriate executable from `here`_.
+Then extract the archive and run in the terminal.
 
 ::
 
-    pip install --user --upgrade donjon-painter
+    donjon-painter
 
-.. _available on PyPI: https://pypi.org/project/donjon-painter/
+.. _here: https://github.com/donjon-painter/donjon-painter/releases/
+
+-----------
+Windows EXE
+-----------
+Windows users have the option of downloading an EXE version of the script, which can be found `over here`_.
+If you wish to run the EXE in the terminal often, you can edit your `PATH`_ environment variable so you don't need to navigate to the program first.
+
+.. _over here: https://github.com/donjon-painter/donjon-painter/releases/
+.. _PATH: https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
+
+
 
 --------
 setup.py
@@ -67,7 +65,7 @@ Usage
 -------------------------
 First of all, begin by heading to `donjon's Random Dungeon Generator`_ to generate the dungeon of your liking. Having done that, you should select the option to download a TSV map of the generated file, as depicted below:
 
-.. image:: https://raw.githubusercontent.com/Blackflighter/donjon-painter/master/res/donjon.png
+.. image:: https://raw.githubusercontent.com/donjon-painter/donjon-painter/master/res/donjon.png
 .. _donjon's Random Dungeon Generator: https://donjon.bin.sh/fantasy/dungeon/
 
 ------------------
@@ -94,7 +92,7 @@ Creating a map in interactive mode is a fairly simple process. You'll be given a
 
 At minimum, you must select your TSV file of choice, along with the theme you would like to use. Other options can be toggled/set if you'd like some further customisation.
 
-.. image:: https://raw.githubusercontent.com/Blackflighter/donjon-painter/master/res/interactive.png
+.. image:: https://raw.githubusercontent.com/donjon-painter/donjon-painter/master/res/interactive.png
 
 Options
 =======
