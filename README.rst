@@ -27,14 +27,14 @@ The packages provided in pyPI and the AUR are outdated.
 Linux and MacOS
 ---------------
 
-Download the appropriate executable from `here`_.
+Download the appropriate executable from `the releases page`_.
 Then extract the archive and run in the terminal.
 
 ::
 
     donjon-painter
 
-.. _here: https://github.com/donjon-painter/donjon-painter/releases/
+.. _the releases page: https://github.com/donjon-painter/donjon-painter/releases/
 
 -----------
 Windows EXE
