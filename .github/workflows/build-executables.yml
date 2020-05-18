@@ -12,7 +12,13 @@ jobs:
     runs-on: ${{ matrix.os }}-latest
     strategy:
       matrix:
-        os: [ubuntu, macos, windows]
+        include:
+          - os: ubuntu
+            add-data: 'themes:themes'
+          - os: macos
+            add-data: 'themes:themes'
+          - os: windows
+            add-data: 'themes;themes'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -32,7 +38,7 @@ jobs:
         run: |
           mkdir ${{ matrix.os }}
           cd donjon_painter
-          python -O -m PyInstaller --clean --onefile --name donjon-painter --distpath ../${{ matrix.os }} painter.py
+          python -O -m PyInstaller --clean --onefile --add-data="${{ matrix.add-data }}" --name donjon-painter --distpath ../${{ matrix.os }} painter.py
 
       - name: Package Executable
         run: |
