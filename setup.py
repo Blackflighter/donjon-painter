@@ -7,7 +7,7 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name='donjon-painter',
-    version='0.9.4',
+    version='0.9.5',
     author='Korvin Roganov',
     author_email='korvinagor@vivaldi.net',
     license='GPLv3',
