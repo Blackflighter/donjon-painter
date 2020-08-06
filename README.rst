@@ -21,8 +21,6 @@ Prerequisites
 Installation
 ============
 
-The packages provided in pyPI and the AUR are outdated.
-
 ---------------
 Linux and MacOS
 ---------------
@@ -35,6 +33,24 @@ Then extract the archive and run in the terminal.
     donjon-painter
 
 .. _the releases page: https://github.com/donjon-painter/donjon-painter/releases/
+
+------------------------
+AUR Package (Arch Linux)
+------------------------
+If you're using Arch Linux, get the PKGBUILD `from here`_.
+
+.. _from here: https://aur.archlinux.org/packages/donjon-painter/
+
+---------
+Using pip
+---------
+donjon-painter is `available on PyPI`_. Get it using this command:
+
+::
+
+    pip install --user --upgrade donjon-painter
+
+.. _available on PyPI: https://pypi.org/project/donjon-painter/
 
 -----------
 Windows EXE
